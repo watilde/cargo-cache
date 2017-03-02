@@ -1,0 +1,8 @@
+[package]
+name = "cargo-cache"
+version = "0.1.0"
+authors = ["Daijiro Wachi <daijiro.wachi@gmail.com>"]
+
+[dependencies]
+cargo = "*"
+clap = "*"
