@@ -4,8 +4,6 @@ extern crate cargo;
 
 use clap::{Arg, App, AppSettings, SubCommand};
 
-use std::process;
-
 fn main() {
     let m = App::new("cargo-cache")
         .about("A third-party cargo extension to manipulates packages cache")
@@ -14,11 +12,13 @@ fn main() {
         .settings(&[AppSettings::SubcommandRequired])
         .subcommand(SubCommand::with_name("cache")
             .about("A third-party cargo extension to manipulates packages cache")
-            .arg(Arg::with_name("CRATE")
-              .help("The name of the crate you would like to open")
-              .required(true)
-              .index(1)))
+            .args(&[
+                Arg::with_name("ls")
+                    .help("Show all data in the cache")
+                    .index(1),
+                Arg::with_name("clean")
+                    .help("Delete data out of the cache folder")
+                    .index(2)
+            ]))
       .get_matches();
-  let crate_name = m.subcommand_matches("open").unwrap().value_of("CRATE").unwrap();
-  println!("{:?} months in a year.", 12);
 }
