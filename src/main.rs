@@ -2,23 +2,24 @@
 extern crate clap;
 extern crate cargo;
 
-use clap::{Arg, App, AppSettings, SubCommand};
+use clap::{Arg, App, SubCommand};
 
 fn main() {
-    let m = App::new("cargo-cache")
-        .about("A third-party cargo extension to manipulates packages cache")
-        .version(concat!("v", crate_version!()))
-        .bin_name("cargo")
-        .settings(&[AppSettings::SubcommandRequired])
+    let matches = App::new("cargo")
         .subcommand(SubCommand::with_name("cache")
+            .version(concat!("v", crate_version!()))
+            .author("Daijiro Wachi <daijiro.wachi@gmail.com>")
             .about("A third-party cargo extension to manipulates packages cache")
+            .usage("cargo cache [ARGS]")
             .args(&[
                 Arg::with_name("ls")
-                    .help("Show all data in the cache")
-                    .index(1),
+                    .help("Show all data in the cache"),
                 Arg::with_name("clean")
                     .help("Delete data out of the cache folder")
-                    .index(2)
             ]))
       .get_matches();
+
+    if matches.is_present("ls") {
+        println!("Awesomeness is turned on");
+    }
 }
